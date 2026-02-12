@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --electric: #00d4ff;
+  --pulse: #ff006e;
+  --warm: #fb5607;
+  --calm: #8338ec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16162a 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--electric), var(--calm));
+  border-radius: 3px;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 9999;
+}
+
+/* Grid background */
+.grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Glow effects */
+.glow-electric {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.2);
+}
+
+.glow-pulse {
+  box-shadow: 0 0 30px rgba(255, 0, 110, 0.4), 0 0 60px rgba(255, 0, 110, 0.2);
+}
+
+.glow-calm {
+  box-shadow: 0 0 30px rgba(131, 56, 236, 0.4), 0 0 60px rgba(131, 56, 236, 0.2);
+}
+
+/* Scanner line animation */
+.scanner-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  animation: scan 2s linear infinite;
+}
+
+/* Emotion bars animation */
+.emotion-bar {
+  transition: width 0.2s ease-out;
+}
+
+/* Face detection box */
+.face-box {
+  border: 2px solid var(--electric);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--electric), var(--calm));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--electric), var(--calm));
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Video container */
+.video-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.video-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Progress indicator */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+/* Emotion indicator colors */
+.emotion-happy { color: #fcd34d; }
+.emotion-sad { color: #60a5fa; }
+.emotion-angry { color: #f87171; }
+.emotion-fearful { color: #a78bfa; }
+.emotion-disgusted { color: #4ade80; }
+.emotion-surprised { color: #f472b6; }
+.emotion-neutral { color: #94a3b8; }
+
+/* Stagger animation */
+@keyframes stagger-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-child {
+  animation: stagger-in 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.stagger-child:nth-child(1) { animation-delay: 0.1s; }
+.stagger-child:nth-child(2) { animation-delay: 0.2s; }
+.stagger-child:nth-child(3) { animation-delay: 0.3s; }
+.stagger-child:nth-child(4) { animation-delay: 0.4s; }
+.stagger-child:nth-child(5) { animation-delay: 0.5s; }
+.stagger-child:nth-child(6) { animation-delay: 0.6s; }
+.stagger-child:nth-child(7) { animation-delay: 0.7s; }
+
+
+
+
