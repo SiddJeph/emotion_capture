@@ -401,6 +401,24 @@ function ApplicationsContent() {
   )
 }
 
+interface AssessmentData {
+  id: string
+  user_id: string
+  summary: {
+    dominantEmotion: string
+    averageConfidence: number
+    duration: number
+    totalDataPoints: number
+    emotionDistribution: Record<string, number>
+    oceanScores?: OceanScores
+    eqScore?: number
+    emotionalStability?: number
+    dominantTrait?: string
+    traitProfile?: string
+  }
+  created_at: string
+}
+
 // Application Detail Modal
 function ApplicationDetailModal({
   application,
@@ -414,24 +432,34 @@ function ApplicationDetailModal({
   isUpdating: boolean
 }) {
   const statusInfo = STATUS_INFO[application.status]
+  const [assessmentData, setAssessmentData] = useState<AssessmentData | null>(null)
+  const [loadingAssessment, setLoadingAssessment] = useState(false)
 
-  // Mock assessment data - in production, fetch from actual assessment results
-  const mockAssessment = {
-    emotionSummary: {
-      dominantEmotion: 'neutral',
-      averageConfidence: 0.85,
-      eqScore: 72,
-      stability: 78,
-    },
-    personalityScores: {
-      openness: 68,
-      conscientiousness: 75,
-      extraversion: 55,
-      agreeableness: 82,
-      neuroticism: 35,
-    } as OceanScores,
-    profile: 'Reliable Team Player',
-  }
+  // Fetch real assessment data
+  useEffect(() => {
+    const fetchAssessment = async () => {
+      setLoadingAssessment(true)
+      try {
+        const res = await fetch(`/api/assessments?userId=${application.userId}`)
+        const data = await res.json()
+        if (data.success && data.data) {
+          setAssessmentData(data.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch assessment:', error)
+      } finally {
+        setLoadingAssessment(false)
+      }
+    }
+
+    if (application.status !== 'assessment_pending') {
+      fetchAssessment()
+    }
+  }, [application.userId, application.status])
+
+  // Use real data or defaults
+  const emotionData = assessmentData?.summary || null
+  const oceanScores = emotionData?.oceanScores || null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -503,84 +531,158 @@ function ApplicationDetailModal({
           {/* Assessment Results */}
           {application.status !== 'assessment_pending' && (
             <>
-              {/* EQ & Emotion */}
-              <div className="glass rounded-xl p-5 border border-white/10">
-                <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-calm" />
-                  Emotional Intelligence
-                </h3>
-                <div className="grid md:grid-cols-4 gap-4">
-                  <div className="p-4 bg-white/5 rounded-xl text-center">
-                    <div className="text-3xl font-bold text-electric">{mockAssessment.emotionSummary.eqScore}</div>
-                    <div className="text-xs text-white/50">EQ Score</div>
-                  </div>
-                  <div className="p-4 bg-white/5 rounded-xl text-center">
-                    <div className="text-3xl font-bold text-calm">{mockAssessment.emotionSummary.stability}%</div>
-                    <div className="text-xs text-white/50">Stability</div>
-                  </div>
-                  <div className="p-4 bg-white/5 rounded-xl text-center">
-                    <div className="text-3xl font-bold capitalize">{mockAssessment.emotionSummary.dominantEmotion}</div>
-                    <div className="text-xs text-white/50">Dominant Emotion</div>
-                  </div>
-                  <div className="p-4 bg-white/5 rounded-xl text-center">
-                    <div className="text-3xl font-bold text-warm">{(mockAssessment.emotionSummary.averageConfidence * 100).toFixed(0)}%</div>
-                    <div className="text-xs text-white/50">Confidence</div>
-                  </div>
+              {loadingAssessment ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-8 h-8 text-electric animate-spin" />
+                  <span className="ml-3 text-white/50">Loading assessment data...</span>
                 </div>
-              </div>
-
-              {/* OCEAN Profile */}
-              <div className="glass rounded-xl p-5 border border-white/10">
-                <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-calm" />
-                  Personality Profile: <span className="text-calm">{mockAssessment.profile}</span>
-                </h3>
-                <div className="space-y-3">
-                  {(Object.entries(mockAssessment.personalityScores) as [OceanTrait, number][]).map(([trait, score]) => {
-                    const info = OCEAN_DESCRIPTIONS[trait]
-                    const jobTrait = application.job?.idealTraits?.find(t => t.trait === trait)
-                    const isMatch = !jobTrait || score >= jobTrait.minScore
-                    
-                    return (
-                      <div key={trait} className="flex items-center gap-4">
-                        <span className="w-8 text-xl">{info.emoji}</span>
-                        <span className="w-32">{info.name}</span>
-                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full rounded-full"
-                            style={{ width: `${score}%`, backgroundColor: info.color }}
-                          />
+              ) : !emotionData ? (
+                <div className="glass rounded-xl p-6 border border-warm/30 bg-warm/5 text-center">
+                  <AlertCircle className="w-12 h-12 mx-auto mb-4 text-warm" />
+                  <h3 className="text-lg font-semibold mb-2">Assessment Data Not Found</h3>
+                  <p className="text-white/50">
+                    The assessment results for this candidate could not be loaded.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {/* EQ & Emotion */}
+                  <div className="glass rounded-xl p-5 border border-white/10">
+                    <h3 className="font-semibold mb-4 flex items-center gap-2">
+                      <Activity className="w-5 h-5 text-calm" />
+                      Emotional Intelligence Assessment
+                    </h3>
+                    <div className="grid md:grid-cols-4 gap-4 mb-6">
+                      <div className="p-4 bg-white/5 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-electric">
+                          {emotionData.eqScore?.toFixed(0) || Math.round(emotionData.averageConfidence * 80 + 20)}
                         </div>
-                        <span className="w-12 text-sm font-mono" style={{ color: info.color }}>
-                          {score}%
-                        </span>
-                        {jobTrait && (
-                          <span className={`text-sm ${isMatch ? 'text-green-500' : 'text-pulse'}`}>
-                            {isMatch ? '✓' : '✗'} {jobTrait.minScore}% req
-                          </span>
-                        )}
+                        <div className="text-xs text-white/50">EQ Score</div>
                       </div>
-                    )
-                  })}
-                </div>
-              </div>
+                      <div className="p-4 bg-white/5 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-calm">
+                          {emotionData.emotionalStability?.toFixed(0) || 70}%
+                        </div>
+                        <div className="text-xs text-white/50">Stability</div>
+                      </div>
+                      <div className="p-4 bg-white/5 rounded-xl text-center">
+                        <div className="text-3xl font-bold capitalize">{emotionData.dominantEmotion}</div>
+                        <div className="text-xs text-white/50">Dominant Emotion</div>
+                      </div>
+                      <div className="p-4 bg-white/5 rounded-xl text-center">
+                        <div className="text-3xl font-bold text-warm">
+                          {(emotionData.averageConfidence * 100).toFixed(0)}%
+                        </div>
+                        <div className="text-xs text-white/50">Confidence</div>
+                      </div>
+                    </div>
+                    
+                    {/* Emotion Distribution */}
+                    <h4 className="text-sm font-medium text-white/70 mb-3">Emotion Distribution</h4>
+                    <div className="space-y-2">
+                      {Object.entries(emotionData.emotionDistribution)
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([emotion, value]) => (
+                          <div key={emotion} className="flex items-center gap-3">
+                            <span className="w-24 text-sm capitalize">{emotion}</span>
+                            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                              <div 
+                                className="h-full rounded-full bg-electric"
+                                style={{ width: `${value * 100}%` }}
+                              />
+                            </div>
+                            <span className="w-14 text-xs text-white/50 text-right">
+                              {(value * 100).toFixed(1)}%
+                            </span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
 
-              {/* Job Requirements Match */}
-              {application.job?.requirements && (
-                <div className="glass rounded-xl p-5 border border-white/10">
-                  <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-warm" />
-                    Job Requirements
-                  </h3>
-                  <ul className="space-y-2">
-                    {application.job.requirements.map((req, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-white/30 mt-0.5" />
-                        {req}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  {/* OCEAN Profile */}
+                  {oceanScores && (
+                    <div className="glass rounded-xl p-5 border border-white/10">
+                      <h3 className="font-semibold mb-4 flex items-center gap-2">
+                        <Brain className="w-5 h-5 text-calm" />
+                        Personality Profile: <span className="text-calm">{emotionData.traitProfile || 'Assessed'}</span>
+                      </h3>
+                      <div className="space-y-3">
+                        {(Object.entries(oceanScores) as [OceanTrait, number][])
+                          .sort((a, b) => b[1] - a[1])
+                          .map(([trait, score]) => {
+                            const info = OCEAN_DESCRIPTIONS[trait]
+                            const jobTrait = application.job?.idealTraits?.find(t => t.trait === trait)
+                            const isMatch = !jobTrait || score >= jobTrait.minScore
+                            
+                            return (
+                              <div key={trait} className="flex items-center gap-4">
+                                <span className="w-8 text-xl">{info.emoji}</span>
+                                <span className="w-32">{info.name}</span>
+                                <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden">
+                                  <div 
+                                    className="h-full rounded-full"
+                                    style={{ width: `${score}%`, backgroundColor: info.color }}
+                                  />
+                                </div>
+                                <span className="w-14 text-sm font-mono" style={{ color: info.color }}>
+                                  {score.toFixed(0)}%
+                                </span>
+                                {jobTrait && (
+                                  <span className={`text-sm ${isMatch ? 'text-green-500' : 'text-pulse'}`}>
+                                    {isMatch ? '✓' : '✗'} {jobTrait.minScore}% req
+                                  </span>
+                                )}
+                              </div>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Assessment Metadata */}
+                  <div className="glass rounded-xl p-5 border border-white/10">
+                    <h3 className="font-semibold mb-4 flex items-center gap-2">
+                      <BarChart3 className="w-5 h-5 text-warm" />
+                      Assessment Details
+                    </h3>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="p-3 bg-white/5 rounded-lg">
+                        <div className="text-sm text-white/50">Video Duration</div>
+                        <div className="font-semibold">{emotionData.duration?.toFixed(1) || 'N/A'}s</div>
+                      </div>
+                      <div className="p-3 bg-white/5 rounded-lg">
+                        <div className="text-sm text-white/50">Data Points Captured</div>
+                        <div className="font-semibold">{emotionData.totalDataPoints || 'N/A'}</div>
+                      </div>
+                      <div className="p-3 bg-white/5 rounded-lg">
+                        <div className="text-sm text-white/50">Assessment Date</div>
+                        <div className="font-semibold">
+                          {assessmentData?.created_at 
+                            ? new Date(assessmentData.created_at).toLocaleString()
+                            : 'N/A'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Job Requirements Match */}
+                  {application.job?.requirements && (
+                    <div className="glass rounded-xl p-5 border border-white/10">
+                      <h3 className="font-semibold mb-4 flex items-center gap-2">
+                        <Briefcase className="w-5 h-5 text-warm" />
+                        Job Requirements
+                      </h3>
+                      <ul className="space-y-2">
+                        {application.job.requirements.map((req, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-white/70">
+                            <CheckCircle2 className="w-4 h-4 text-white/30 mt-0.5" />
+                            {req}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}

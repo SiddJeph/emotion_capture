@@ -149,4 +149,23 @@ export async function getResponsesLocally(
   return responses.slice(0, limit)
 }
 
+// Get latest assessment result for a specific user
+export async function getLatestUserAssessment(userId: string): Promise<StoredResponse | null> {
+  const responses = loadResponses()
+  
+  const userResponses = responses
+    .filter(r => r.user_id === userId)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  
+  return userResponses[0] || null
+}
+
+// Get all assessment results (for admin)
+export async function getAllAssessments(): Promise<StoredResponse[]> {
+  const responses = loadResponses()
+  return responses.sort((a, b) => 
+    new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  )
+}
+
 
