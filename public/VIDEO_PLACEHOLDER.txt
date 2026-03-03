@@ -1,0 +1,21 @@
+SAMPLE VIDEO REQUIRED
+=====================
+
+Place a video file named "sample-video.mp4" in this directory (public/).
+
+Recommended video specifications:
+- Format: MP4 (H.264 codec)
+- Duration: 30-120 seconds
+- Resolution: 720p or 1080p
+- Content: Emotional content works best (movie clips, ads, etc.)
+
+You can also use a URL instead by editing src/app/page.tsx:
+  const DEMO_VIDEO_URL = 'https://your-video-url.mp4'
+
+For testing, you can download a sample video from:
+- Pexels: https://www.pexels.com/videos/
+- Pixabay: https://pixabay.com/videos/
+
+
+
+
