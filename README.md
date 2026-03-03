@@ -1,4 +1,4 @@
-# Emotion Capture - AI Hiring Platform
+# AI Powered Hiring Platform
 
 A web-based hiring assistance tool that uses facial emotion detection and OCEAN personality assessment to match candidates with jobs.
 
