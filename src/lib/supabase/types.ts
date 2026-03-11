@@ -29,10 +29,23 @@ export interface Database {
     Tables: {
       candidate_responses: {
         Row: CandidateResponse
-        Insert: Omit<CandidateResponse, 'id' | 'created_at'>
-        Update: Partial<Omit<CandidateResponse, 'id' | 'created_at'>>
+        Insert: {
+          user_id?: string | null
+          video_id: string
+          raw_timeline: EmotionDataPoint[]
+          summary: EmotionSummary
+        }
+        Update: {
+          user_id?: string | null
+          video_id?: string
+          raw_timeline?: EmotionDataPoint[]
+          summary?: EmotionSummary
+        }
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
 

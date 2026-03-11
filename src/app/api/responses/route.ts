@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
     
     if (supabase) {
       // Supabase is configured - use it
-      const { data, error } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase as any)
         .from('candidate_responses')
         .insert({
           user_id: userId || null,
@@ -108,7 +109,8 @@ export async function GET(request: NextRequest) {
     const supabase = createServerClient()
     
     if (supabase) {
-      let query = supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let query = (supabase as any)
         .from('candidate_responses')
         .select('*')
         .order('created_at', { ascending: false })
