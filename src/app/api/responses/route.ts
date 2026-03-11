@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase/client'
 import { saveResponseLocally, getResponsesLocally } from '@/lib/storage/local'
-import { EmotionDataPoint, EmotionSummary } from '@/lib/supabase/types'
+import { EmotionDataPoint, EmotionSummary, CandidateResponse } from '@/lib/supabase/types'
 
 interface SubmitResponseBody {
   videoId: string
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
           video_id: videoId,
           raw_timeline: timeline,
           summary: summary,
-        })
+        } as never)
         .select()
         .single()
 
@@ -62,16 +62,17 @@ export async function POST(request: NextRequest) {
         })
       }
 
+      const row = data as CandidateResponse
       console.log('\n✅ Results saved to Supabase!')
-      console.log(`   ID: ${data.id}`)
+      console.log(`   ID: ${row.id}`)
       console.log(`   Video: ${videoId}`)
       console.log(`   Data Points: ${timeline.length}\n`)
 
       return NextResponse.json({
         success: true,
         data: {
-          id: data.id,
-          createdAt: data.created_at,
+          id: row.id,
+          createdAt: row.created_at,
           storage: 'supabase',
         },
       })
