@@ -202,8 +202,8 @@ export default function JobsPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-calm flex items-center justify-center">
-                  <Zap className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-electric flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-midnight" />
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold">AI Career Hub</h1>
@@ -246,7 +246,7 @@ export default function JobsPage() {
         {/* Hero Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">
-            Find Your <span className="gradient-text">Perfect Match</span>
+            Find Your <span className="text-electric">Perfect Match</span>
           </h2>
           <p className="text-white/60">
             AI-powered job matching based on your personality and emotional intelligence
@@ -450,7 +450,7 @@ function JobCard({
   return (
     <div 
       className={`glass rounded-xl p-6 cursor-pointer hover:bg-white/5 transition-all ${
-        isTopMatch ? 'border-2 border-electric glow-electric' : 'border border-white/10'
+        isTopMatch ? 'border-2 border-electric' : 'border border-white/10'
       }`}
       onClick={onSelect}
     >

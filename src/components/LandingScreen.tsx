@@ -77,13 +77,6 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8 grid-bg overflow-hidden">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-electric/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-calm/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-pulse/5 rounded-full blur-3xl" />
-      </div>
-
       <div className="max-w-4xl w-full relative">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
@@ -95,7 +88,7 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Discover Your
             <br />
-            <span className="gradient-text">Emotional Response</span>
+            <span className="text-electric">Emotional Response</span>
           </h1>
           
           <p className="text-xl text-white/50 max-w-2xl mx-auto">
@@ -248,15 +241,23 @@ export default function LandingScreen({ onStart }: LandingScreenProps) {
           </p>
         </div>
 
-        {/* Emotion Preview */}
-        <div className="flex justify-center gap-4 mt-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          {['😊', '😢', '😠', '😨', '🤢', '😲', '😐'].map((emoji, i) => (
+        {/* Emotion Legend */}
+        <div className="flex flex-wrap justify-center gap-4 mt-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          {[
+            { label: 'Happy', color: 'emotion-happy' },
+            { label: 'Sad', color: 'emotion-sad' },
+            { label: 'Angry', color: 'emotion-angry' },
+            { label: 'Fearful', color: 'emotion-fearful' },
+            { label: 'Disgusted', color: 'emotion-disgusted' },
+            { label: 'Surprised', color: 'emotion-surprised' },
+            { label: 'Neutral', color: 'emotion-neutral' },
+          ].map((emotion, i) => (
             <div 
               key={i}
-              className="text-3xl opacity-50 hover:opacity-100 hover:scale-125 transition-all cursor-default"
-              style={{ animationDelay: `${i * 0.1}s` }}
+              className="flex items-center gap-2 text-sm text-white/60"
             >
-              {emoji}
+              <span className={`w-2.5 h-2.5 rounded-full ${emotion.color}`} />
+              <span>{emotion.label}</span>
             </div>
           ))}
         </div>

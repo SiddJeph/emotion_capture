@@ -173,8 +173,8 @@ function ApplicationsContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pulse to-warm flex items-center justify-center">
-                  <Building className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-pulse flex items-center justify-center">
+                  <Building className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold">Admin Portal</h1>
@@ -223,7 +223,7 @@ function ApplicationsContent() {
         {/* Page Header */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">
-            Application <span className="gradient-text">Review</span>
+            Application <span className="text-electric">Review</span>
           </h2>
           <p className="text-white/60">Review candidates and make hiring decisions</p>
         </div>

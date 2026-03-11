@@ -142,11 +142,11 @@ export default function ResultsScreen({
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-electric/20 to-calm/20 flex items-center justify-center glow-electric">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-electric/20 flex items-center justify-center border border-electric/30">
             <CheckCircle2 className="w-10 h-10 text-electric" />
           </div>
           <h1 className="text-3xl font-semibold mb-2">
-            Assessment <span className="gradient-text">Complete</span>
+            Assessment <span className="text-electric">Complete</span>
           </h1>
           <p className="text-white/50">
             Here&apos;s your emotional response analysis

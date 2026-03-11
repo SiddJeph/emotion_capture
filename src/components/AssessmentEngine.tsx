@@ -421,7 +421,7 @@ export default function AssessmentEngine({
                   }}
                 >
                   <div 
-                    className="h-full bg-gradient-to-r from-electric to-calm rounded-full transition-all relative"
+                    className="h-full bg-electric rounded-full transition-all relative"
                     style={{ width: `${(currentTime / duration) * 100}%` }}
                   >
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />

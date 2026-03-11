@@ -166,8 +166,8 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pulse to-warm flex items-center justify-center">
-                  <Building className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-pulse flex items-center justify-center">
+                  <Building className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold">Admin Portal</h1>
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">
-            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span>
+            Welcome back, <span className="text-electric">{user?.name?.split(' ')[0]}</span>
           </h2>
           <p className="text-white/60">Here's what's happening with your hiring today.</p>
         </div>
@@ -480,10 +480,10 @@ export default function AdminDashboard() {
         </div>
 
         {/* AI Insights Banner */}
-        <div className="mt-8 glass rounded-2xl p-6 bg-gradient-to-r from-electric/10 to-calm/10 border border-electric/30">
+        <div className="mt-8 glass rounded-2xl p-6 bg-electric/10 border border-electric/30">
           <div className="flex items-center gap-6">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-electric to-calm flex items-center justify-center">
-              <Brain className="w-8 h-8" />
+            <div className="w-16 h-16 rounded-2xl bg-electric flex items-center justify-center">
+              <Brain className="w-8 h-8 text-midnight" />
             </div>
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-1">AI-Powered Hiring</h3>

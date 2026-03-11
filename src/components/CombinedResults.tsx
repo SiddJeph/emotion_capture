@@ -60,11 +60,11 @@ export default function CombinedResults({
         <div className="glass rounded-3xl overflow-hidden animate-fade-in">
           {/* Header */}
           <div className="p-10 text-center border-b border-white/10">
-            <div className="w-28 h-28 mx-auto mb-8 rounded-full bg-gradient-to-br from-electric via-calm to-pulse flex items-center justify-center glow-electric">
-              <CheckCircle2 className="w-14 h-14 text-white" />
+            <div className="w-28 h-28 mx-auto mb-8 rounded-full bg-electric flex items-center justify-center border-4 border-electric/30">
+              <CheckCircle2 className="w-14 h-14 text-midnight" />
             </div>
             <h1 className="text-4xl font-bold mb-3">
-              Assessment <span className="gradient-text">Complete!</span>
+              Assessment <span className="text-electric">Complete!</span>
             </h1>
             <p className="text-white/60 text-lg">
               Thank you for completing the assessment
@@ -106,8 +106,8 @@ export default function CombinedResults({
             {applicationContext?.job && (
               <div className="mb-8 p-6 bg-white/5 rounded-2xl border border-white/10">
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center text-2xl flex-shrink-0">
-                    {applicationContext.job.logo || '💼'}
+                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <Briefcase className="w-7 h-7 text-electric" />
                   </div>
                   <div className="flex-1">
                     <div className="text-sm text-electric mb-1 flex items-center gap-2">

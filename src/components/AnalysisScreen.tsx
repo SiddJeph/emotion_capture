@@ -146,12 +146,11 @@ export default function AnalysisScreen({
       <div className="max-w-4xl w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-electric via-calm to-pulse flex items-center justify-center relative">
-            <Cpu className="w-10 h-10 text-white animate-pulse" />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-electric to-calm opacity-50 animate-ping" />
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-electric flex items-center justify-center relative border-4 border-electric/30">
+            <Cpu className="w-10 h-10 text-midnight animate-pulse" />
           </div>
           <h1 className="text-3xl font-bold mb-2">
-            Analyzing Your <span className="gradient-text">Assessment</span>
+            Analyzing Your <span className="text-electric">Assessment</span>
           </h1>
           <p className="text-white/50">
             Our AI models are processing your responses
@@ -166,7 +165,7 @@ export default function AnalysisScreen({
           </div>
           <div className="h-3 bg-white/10 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-electric via-calm to-pulse rounded-full transition-all duration-500"
+              className="h-full bg-electric rounded-full transition-all duration-500"
               style={{ width: `${overallProgress}%` }}
             />
           </div>
@@ -324,8 +323,8 @@ export default function AnalysisScreen({
         {phase === 'integrating' && (
           <div className="mt-6 glass rounded-xl p-6 animate-fade-in">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-electric to-calm flex items-center justify-center">
-                <Zap className="w-5 h-5 animate-pulse" />
+              <div className="w-10 h-10 rounded-lg bg-electric flex items-center justify-center">
+                <Zap className="w-5 h-5 text-midnight animate-pulse" />
               </div>
               <div>
                 <h3 className="font-semibold">Final Integration</h3>
@@ -335,7 +334,7 @@ export default function AnalysisScreen({
             
             <div className="h-2 bg-white/10 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-electric to-calm rounded-full transition-all duration-300"
+                className="h-full bg-electric rounded-full transition-all duration-300"
                 style={{ width: `${integrationProgress}%` }}
               />
             </div>

@@ -261,7 +261,7 @@ export default function CalibrationScreen({ onReady }: CalibrationScreenProps) {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-semibold mb-3">
-              Face <span className="gradient-text">Calibration</span>
+              Face <span className="text-electric">Calibration</span>
             </h1>
             <p className="text-white/50 max-w-md mx-auto">
               Let&apos;s make sure we can see you clearly. Position yourself in 
@@ -349,9 +349,7 @@ export default function CalibrationScreen({ onReady }: CalibrationScreenProps) {
                   <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                     <div
                       className={`h-full transition-all duration-200 rounded-full ${
-                        isCalibrated 
-                          ? 'bg-gradient-to-r from-electric to-calm' 
-                          : 'bg-gradient-to-r from-calm to-pulse'
+                        isCalibrated ? 'bg-electric' : 'bg-calm'
                       }`}
                       style={{ width: `${calibrationProgress}%` }}
                     />

@@ -135,8 +135,8 @@ export default function AdminJobsPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pulse to-warm flex items-center justify-center">
-                  <Building className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-pulse flex items-center justify-center">
+                  <Building className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold">Admin Portal</h1>
@@ -186,7 +186,7 @@ export default function AdminJobsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold mb-2">
-              Job <span className="gradient-text">Management</span>
+              Job <span className="text-electric">Management</span>
             </h2>
             <p className="text-white/60">Create, edit, and manage job postings</p>
           </div>

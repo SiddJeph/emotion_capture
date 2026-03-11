@@ -14,7 +14,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16162a 100%);
+  background-color: #0f0f1a;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -29,7 +29,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--electric), var(--calm));
+  background-color: var(--electric);
   border-radius: 3px;
 }
 
@@ -72,7 +72,7 @@ body {
   position: absolute;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  background-color: var(--electric);
   animation: scan 2s linear infinite;
 }
 
@@ -84,16 +84,12 @@ body {
 /* Face detection box */
 .face-box {
   border: 2px solid var(--electric);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--electric), var(--calm));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--electric);
 }
 
 /* Glass morphism */
@@ -105,7 +101,7 @@ body {
 
 /* Button styles */
 .btn-primary {
-  background: linear-gradient(135deg, var(--electric), var(--calm));
+  background-color: var(--electric);
   transition: all 0.3s ease;
 }
 

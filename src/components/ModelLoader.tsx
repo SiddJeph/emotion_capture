@@ -56,14 +56,14 @@ export default function ModelLoader({ onLoaded }: ModelLoaderProps) {
         <div className="glass rounded-2xl p-8 animate-fade-in">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-electric/20 to-calm/20 flex items-center justify-center relative">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-electric/20 flex items-center justify-center relative border border-electric/30">
               <Cpu className="w-10 h-10 text-electric" />
               {loadingStarted && loadedCount < totalModels && (
                 <div className="absolute inset-0 rounded-2xl border-2 border-electric animate-pulse" />
               )}
             </div>
             <h1 className="text-2xl font-semibold mb-2">
-              Initializing <span className="gradient-text">AI Engine</span>
+              Initializing <span className="text-electric">AI Engine</span>
             </h1>
             <p className="text-white/50 text-sm">
               Loading neural networks for emotion detection
@@ -78,7 +78,7 @@ export default function ModelLoader({ onLoaded }: ModelLoaderProps) {
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-electric to-calm transition-all duration-500 ease-out rounded-full"
+                className="h-full bg-electric transition-all duration-500 ease-out rounded-full"
                 style={{ width: `${percentComplete}%` }}
               />
             </div>

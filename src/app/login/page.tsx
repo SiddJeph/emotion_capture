@@ -59,11 +59,11 @@ export default function CandidateLoginPage() {
       <div className="w-full max-w-md relative">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-electric/20 to-calm/20 flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-electric/20 flex items-center justify-center border border-electric/30">
             <Sparkles className="w-8 h-8 text-electric" />
           </div>
           <h1 className="text-2xl font-semibold mb-2">
-            Candidate <span className="gradient-text">Portal</span>
+            Candidate <span className="text-electric">Portal</span>
           </h1>
           <p className="text-white/50 text-sm">
             {mode === 'login' ? 'Sign in to take your assessment' : 'Create your account to get started'}

@@ -126,9 +126,7 @@ export async function getApplicationsByJob(jobId: string): Promise<JobApplicatio
     .sort((a, b) => new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime())
 }
 
-// ============================================================================
 // JOB MANAGEMENT (for Admin)
-// ============================================================================
 
 // Load jobs (custom + sample)
 function loadJobs(): Job[] {

@@ -47,15 +47,16 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-pulse/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="noise-overlay" />
-
       {/* Navigation */}
       <nav className="relative z-10 max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-calm flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-white" />
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-electric flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-midnight" />
           </div>
-          <span className="font-semibold text-lg">EmotionCapture</span>
+          <div className="flex flex-col items-start">
+            <span className="font-semibold text-lg">EmotionCapture</span>
+            <span className="text-xs text-white/50">Emotional intelligence insights</span>
+          </div>
         </div>
         
         <div className="flex items-center gap-3">
@@ -87,7 +88,7 @@ export default function HomePage() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-slide-up">
             Understand
             <br />
-            <span className="gradient-text">Emotional Intelligence</span>
+            <span className="text-electric">Emotional Intelligence</span>
           </h1>
 
           {/* Subheading */}
@@ -142,7 +143,7 @@ export default function HomePage() {
                 className="glass rounded-2xl p-6 text-center stagger-child"
                 style={{ animationDelay: `${0.4 + i * 0.1}s` }}
               >
-                <div className={`w-12 h-12 rounded-xl bg-${feature.color}/20 flex items-center justify-center mx-auto mb-4`}>
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mx-auto mb-4">
                   <feature.icon className={`w-6 h-6 text-${feature.color}`} />
                 </div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
@@ -152,14 +153,23 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Emotion Icons */}
-        <div className="flex justify-center gap-4 mt-16 animate-fade-in" style={{ animationDelay: '0.7s' }}>
-          {['😊', '😢', '😠', '😨', '🤢', '😲', '😐'].map((emoji, i) => (
+        {/* Emotion Legend */}
+        <div className="flex flex-wrap justify-center gap-4 mt-16 animate-fade-in" style={{ animationDelay: '0.7s' }}>
+          {[
+            { label: 'Happy', color: 'emotion-happy' },
+            { label: 'Sad', color: 'emotion-sad' },
+            { label: 'Angry', color: 'emotion-angry' },
+            { label: 'Fearful', color: 'emotion-fearful' },
+            { label: 'Disgusted', color: 'emotion-disgusted' },
+            { label: 'Surprised', color: 'emotion-surprised' },
+            { label: 'Neutral', color: 'emotion-neutral' },
+          ].map((emotion, i) => (
             <div 
               key={i}
-              className="text-4xl opacity-30 hover:opacity-100 hover:scale-125 transition-all cursor-default"
+              className="flex items-center gap-2 text-sm text-white/60"
             >
-              {emoji}
+              <span className={`w-2.5 h-2.5 rounded-full ${emotion.color}`} />
+              <span>{emotion.label}</span>
             </div>
           ))}
         </div>

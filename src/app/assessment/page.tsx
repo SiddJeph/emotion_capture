@@ -303,8 +303,8 @@ function AssessmentContent() {
             <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40 w-full max-w-2xl px-4">
               <div className="glass rounded-xl p-6 border border-electric/30 bg-electric/5 animate-fade-in">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center text-2xl">
-                    {applicationContext.job.logo || '💼'}
+                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center">
+                    <Briefcase className="w-7 h-7 text-electric" />
                   </div>
                   <div className="flex-1">
                     <div className="text-sm text-electric mb-1">AI Assessment for Job Application</div>
@@ -352,7 +352,7 @@ function AssessmentContent() {
       {appState === 'round1_complete' && emotionResult && (
         <div className="min-h-screen flex items-center justify-center p-6 grid-bg">
           <div className="max-w-lg w-full text-center animate-fade-in mt-16">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-electric/20 to-calm/20 flex items-center justify-center glow-electric relative">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-electric/20 flex items-center justify-center border border-electric/30 relative">
               <CheckCircle2 className="w-10 h-10 text-electric" />
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-electric rounded-full flex items-center justify-center text-sm font-bold">
                 1
@@ -360,7 +360,7 @@ function AssessmentContent() {
             </div>
             
             <h2 className="text-2xl font-semibold mb-3">
-              Round 1 <span className="gradient-text">Complete!</span>
+              Round 1 <span className="text-electric">Complete!</span>
             </h2>
             
             <p className="text-white/50 mb-6">
@@ -371,8 +371,8 @@ function AssessmentContent() {
             {applicationContext?.job && (
               <div className="glass rounded-xl p-4 mb-6 border border-white/10">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-xl">
-                    {applicationContext.job.logo || '💼'}
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-electric" />
                   </div>
                   <div className="text-left">
                     <div className="text-xs text-white/50">Applying for</div>

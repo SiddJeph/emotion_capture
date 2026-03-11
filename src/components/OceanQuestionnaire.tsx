@@ -79,7 +79,7 @@ export default function OceanQuestionnaire({ onComplete }: OceanQuestionnairePro
     return (
       <div className="min-h-screen flex items-center justify-center p-6 grid-bg">
         <div className="text-center animate-fade-in">
-          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-calm to-electric flex items-center justify-center glow-calm">
+          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-calm flex items-center justify-center border-4 border-calm/30">
             <CheckCircle2 className="w-12 h-12 text-white" />
           </div>
           <h2 className="text-2xl font-semibold mb-2">Questionnaire Complete!</h2>
@@ -113,7 +113,7 @@ export default function OceanQuestionnaire({ onComplete }: OceanQuestionnairePro
           </div>
           <div className="h-2 bg-white/10 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-calm to-electric transition-all duration-300 rounded-full"
+              className="h-full bg-calm transition-all duration-300 rounded-full"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -208,7 +208,7 @@ export default function OceanQuestionnaire({ onComplete }: OceanQuestionnairePro
                 disabled={!canProceed}
                 className={`flex items-center gap-2 px-6 py-2 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                   isLastQuestion && allAnswered
-                    ? 'bg-gradient-to-r from-calm to-electric'
+                    ? 'bg-calm'
                     : 'bg-calm hover:bg-calm/80'
                 }`}
               >

@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md relative">
         {/* Logo/Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-calm/30 to-pulse/20 flex items-center justify-center glow-calm">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-calm/30 flex items-center justify-center border border-calm/40">
             <Shield className="w-8 h-8 text-calm" />
           </div>
           <h1 className="text-2xl font-semibold mb-2">
@@ -128,7 +128,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading || success}
-              className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 bg-gradient-to-r from-calm to-pulse hover:opacity-90 transition-opacity"
+              className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 bg-calm hover:bg-calm/90 transition-colors"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

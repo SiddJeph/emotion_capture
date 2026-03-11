@@ -140,9 +140,9 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-calm flex items-center justify-center">
-                  <Zap className="w-5 h-5" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-electric flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-midnight" />
                 </div>
                 <div>
                   <h1 className="text-xl font-semibold">AI Career Hub</h1>
@@ -185,7 +185,7 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">
-            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span>! 👋
+            Welcome back, <span className="text-electric">{user?.name?.split(' ')[0]}</span>
           </h2>
           <p className="text-white/60">
             Your AI-powered career journey continues. Here's your progress.
@@ -305,8 +305,8 @@ export default function DashboardPage() {
                         return (
                           <div key={app.id} className="p-4 hover:bg-white/5 transition-colors">
                             <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center text-xl">
-                                {app.job?.logo || '💼'}
+                              <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center">
+                                <Briefcase className="w-5 h-5 text-electric" />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <h4 className="font-medium truncate">{app.job?.title}</h4>
@@ -376,10 +376,10 @@ export default function DashboardPage() {
               <div className="space-y-6">
                 {/* Profile Card */}
                 <div className="glass rounded-xl border border-white/10 overflow-hidden">
-                  <div className="h-20 bg-gradient-to-r from-electric via-calm to-pulse" />
+                  <div className="h-20 bg-electric/20" />
                   <div className="px-6 pb-6 -mt-10">
-                    <div className="w-20 h-20 rounded-2xl bg-dark border-4 border-dark flex items-center justify-center text-3xl mb-4">
-                      {user?.name?.charAt(0).toUpperCase() || '👤'}
+                    <div className="w-20 h-20 rounded-2xl bg-midnight border-4 border-midnight flex items-center justify-center text-3xl mb-4">
+                      {user?.name?.charAt(0).toUpperCase()}
                     </div>
                     <h3 className="text-xl font-semibold">{user?.name}</h3>
                     <p className="text-white/50 text-sm">{user?.email}</p>
@@ -391,7 +391,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-electric to-calm rounded-full transition-all"
+                          className="h-full bg-electric rounded-full transition-all"
                           style={{ width: `${stats.profileCompletion}%` }}
                         />
                       </div>
@@ -409,7 +409,12 @@ export default function DashboardPage() {
                     
                     {dominantTraitInfo && (
                       <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl mb-4">
-                        <span className="text-3xl">{dominantTraitInfo.emoji}</span>
+                        <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center">
+                          <span 
+                            className="w-4 h-4 rounded-full"
+                            style={{ backgroundColor: dominantTraitInfo.color }}
+                          />
+                        </div>
                         <div>
                           <div className="text-sm text-white/50">Dominant Trait</div>
                           <div className="font-semibold" style={{ color: dominantTraitInfo.color }}>
