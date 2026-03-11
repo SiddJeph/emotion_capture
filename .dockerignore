@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+.yarn
+
+# Build output
+.next
+out
+build
+
+# Git and IDE
+.git
+.gitignore
+.idea
+.vscode
+*.swp
+*.swo
+
+# Env (use runtime env or docker run -e)
+.env
+.env.*
+!.env.example
+
+# Misc
+.DS_Store
+Thumbs.db
+*.md
+*.log
+coverage
+.vercel
+data
