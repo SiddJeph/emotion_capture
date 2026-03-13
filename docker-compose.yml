@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  emotion-capture:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: emotion-capture:latest
+    container_name: emotion-capture
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # Add Supabase env vars if needed
+      # - NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+      # - NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
+    volumes:
+      # Persist local data storage
+      - ./data:/app/data
+    restart: unless-stopped
