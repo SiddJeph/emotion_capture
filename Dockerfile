@@ -37,9 +37,9 @@ RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
 # Switch to non-root user
 USER nextjs
 
-EXPOSE 3000
+EXPOSE 3005
 
-ENV PORT=3000
+ENV PORT=3005
 ENV HOSTNAME="0.0.0.0"
 
 CMD ["node", "server.js"]
