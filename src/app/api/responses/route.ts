@@ -36,7 +36,19 @@ export async function POST(request: NextRequest) {
     
     if (supabase) {
       // Supabase is configured - use it
-      const { data, error } = await supabase
+      type CandidateResponseRow = {
+        id: string
+        created_at: string
+        user_id: string | null
+        video_id: string
+        raw_timeline: EmotionDataPoint[]
+        summary: EmotionSummary
+      }
+
+      // The Supabase client here is not wired to a typed Database definition,
+      // so we route this particular call through an untyped client and then
+      // cast the result to the shape we expect.
+      const { data, error } = await (supabase as any)
         .from('candidate_responses')
         .insert({
           user_id: userId || null,
@@ -62,16 +74,18 @@ export async function POST(request: NextRequest) {
         })
       }
 
+      const row = data as CandidateResponseRow
+
       console.log('\n✅ Results saved to Supabase!')
-      console.log(`   ID: ${data.id}`)
+      console.log(`   ID: ${row.id}`)
       console.log(`   Video: ${videoId}`)
       console.log(`   Data Points: ${timeline.length}\n`)
 
       return NextResponse.json({
         success: true,
         data: {
-          id: data.id,
-          createdAt: data.created_at,
+          id: row.id,
+          createdAt: row.created_at,
           storage: 'supabase',
         },
       })
